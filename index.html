@@ -34,12 +34,17 @@ button{
     border:none;
     border-radius:25px;
     cursor:pointer;
-    margin:10px;
+    margin:15px;
 }
 
-.heart-btn{
+.enter-btn{
     background:red;
     color:white;
+}
+
+.next-btn{
+    background:white;
+    color:black;
 }
 
 #yesBtn{
@@ -58,40 +63,98 @@ img,video{
     margin:15px 0;
     border-radius:15px;
 }
+
+/* YES SCREEN */
+.yesImages{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.yesImages img{
+    max-width:300px;
+}
 </style>
 </head>
 <body>
 
+<audio id="bgMusic" loop>
+  <source src="love-story.mp3" type="audio/mp3">
+</audio>
+
+<!-- INTRO -->
 <section id="intro" class="active">
 <h1>Hi Ammu ❤️</h1>
-<p>You are my happiness and my forever ❤️</p>
-<button class="heart-btn" onclick="startStory()">💖 Enter My Heart 💖</button>
+<p>From strangers… to forever 💕</p>
+<button class="enter-btn" onclick="startStory()">💖 Enter My Heart 💖</button>
 </section>
 
+<!-- MEET -->
 <section id="story1">
-<h2>Our First Meeting</h2>
+<h2>The First Time We Met</h2>
 <p>I didn’t know I was meeting my whole future ❤️</p>
 <img src="meet1.jpg">
-<img src="meet2.jpg">
-<button onclick="next(2)">Next</button>
+<button class="next-btn" onclick="next(2)">Next</button>
 </section>
 
+<!-- CHAT -->
 <section id="story2">
+<h2>Our Cute Chats</h2>
+<p>From good morning texts to late night talks 💕</p>
+<img src="chat1.jpg">
+<img src="chat2.jpg">
+<button class="next-btn" onclick="next(3)">Next</button>
+</section>
+
+<!-- FIGHT -->
+<section id="story3">
+<h2>Our Fight</h2>
+<p>We fought… but never gave up ❤️</p>
+<video src="fight.mp4" controls></video>
+<button class="next-btn" onclick="next(4)">Next</button>
+</section>
+
+<!-- PATCH -->
+<section id="story4">
+<h2>Our Patch Up</h2>
+<p>We always come back stronger 💞</p>
+<img src="patch.jpg">
+<video src="patch.mp4" controls></video>
+<button class="next-btn" onclick="next(5)">Next</button>
+</section>
+
+<!-- PRESENT -->
+<section id="story5">
+<h2>Us Now ❤️</h2>
+<p>Today we are stronger than ever 💕</p>
+<img src="present.jpg">
+<button class="next-btn" onclick="next(6)">Next</button>
+</section>
+
+<!-- VALENTINE -->
+<section id="story6">
 <h2>Will You Be My Valentine?</h2>
 <button id="yesBtn" onclick="showYes()">YES ❤️</button>
 <button id="noBtn" onmouseover="moveNo()">NO 😜</button>
 </section>
 
+<!-- YES SCREEN -->
 <section id="yesScreen">
 <h1>I LOVE YOU FOREVER ❤️</h1>
-<img src="yes1.jpg">
-<img src="yes2.jpg">
+<div class="yesImages">
+    <img src="yes1.jpg">
+    <img src="yes2.jpg">
+</div>
 </section>
 
 <script>
+let music = document.getElementById("bgMusic");
+
 function startStory(){
     document.getElementById("intro").classList.remove("active");
     document.getElementById("story1").classList.add("active");
+    music.play();
 }
 
 function next(num){
