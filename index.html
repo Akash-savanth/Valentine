@@ -165,17 +165,84 @@ button{
 
 <!-- INTRO -->
 <section id="intro" class="active">
-<h1>Hi Ammu ❤️</h1>
-<p>From strangers to forever 💕</p>
-<button class="enter-btn" onclick="startStory()">Enter My Heart ❤️</button>
+  <h1>Hi Ammu ❤️</h1>
+  <p class="intro-text">
+    From two strangers who didn’t even know each other’s names,  
+    to two souls who can’t sleep without saying “goodnight”... 💕  
+    You are not just a part of my life Ammu,  
+    you are the most beautiful chapter of my forever ❤️
+  </p>
+  <button class="enter-btn" onclick="startStory()">Enter My Heart 💖</button>
 </section>
 
 <!-- MEET -->
 <section id="story1">
-<h2>The First Time We Met</h2>
-<p>I didn’t know I was meeting my whole future ❤️</p>
-<img src="meet1.jpg">
+  <h2>The First Time We Met</h2>
+  <p>
+    That day felt normal… but destiny was silently smiling.  
+    I didn’t know I was meeting the girl  
+    who would become my peace, my happiness,  
+    and the reason behind my smile every single day ❤️  
+    I didn’t know I was meeting my whole future.
+  </p>
+  <img src="meet1.jpg">
 </section>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+  text-align: center;
+}
+
+section {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;   /* Vertical center */
+  align-items: center;       /* Horizontal center */
+  padding: 20px;
+}
+
+h1 {
+  font-size: 40px;
+  color: #fff;
+}
+
+.intro-text {
+  max-width: 600px;
+  color: #fff;
+  font-size: 18px;
+  margin: 20px 0;
+  line-height: 1.6;
+}
+
+.enter-btn {
+  background: #ff4d6d;
+  border: none;
+  padding: 15px 35px;
+  font-size: 18px;
+  border-radius: 50px;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s ease;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.enter-btn:hover {
+  background: #ff1e4d;
+  transform: scale(1.1);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+img {
+  width: 250px;
+  border-radius: 20px;
+  margin-top: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+</style>
 
 <!-- CHAT -->
 <section id="story2">
