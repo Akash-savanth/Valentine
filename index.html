@@ -8,7 +8,7 @@
 body{
     margin:0;
     padding:0;
-    background:linear-gradient(to right,#ff9a9e,#fad0c4);
+    background:black;
     font-family:Arial, sans-serif;
     text-align:center;
     color:white;
@@ -25,10 +25,10 @@ section{
     display:block;
 }
 
-/* Text Styling */
+/* Text */
 h1, h2, p{
     color:white;
-    text-shadow:2px 2px 4px rgba(0,0,0,0.5);
+    text-shadow:0 0 10px rgba(255,255,255,0.3);
 }
 
 /* Media */
@@ -37,6 +37,7 @@ img, video{
     max-height:50vh;
     border-radius:15px;
     margin:15px 0;
+    box-shadow:0 0 20px rgba(255,255,255,0.2);
 }
 
 /* Buttons */
@@ -50,17 +51,17 @@ button{
 }
 
 .heart-btn{
-    background:red;
+    background:#ff3366;
     color:white;
 }
 
 #yesBtn{
-    background:green;
+    background:#00cc66;
     color:white;
 }
 
 #noBtn{
-    background:red;
+    background:#ff0033;
     color:white;
     position:relative;
 }
@@ -81,12 +82,13 @@ button{
 .yesImages{
     display:flex;
     justify-content:center;
-    gap:20px;
+    gap:30px;
 }
 
 .yesImages img{
     max-width:300px;
     border-radius:20px;
+    box-shadow:0 0 30px rgba(255,255,255,0.4);
 }
 
 </style>
@@ -113,4 +115,90 @@ You are my peace and happiness. 💕
 <h2>The First Time We Met</h2>
 <img src="meet1.jpg">
 <img src="meet2.jpg">
-<p>I didn't know I was meeting my whole futu
+<p>I didn't know I was meeting my whole future. ❤️</p>
+<button onclick="next(2)">Next</button>
+</section>
+
+<!-- STORY 2 -->
+<section id="story2">
+<h2>Our Cute Chats</h2>
+<img src="chat1.jpg">
+<img src="chat2.jpg">
+<p>From good morning texts to late night talks… 💕</p>
+<button onclick="next(3)">Next</button>
+</section>
+
+<!-- STORY 3 -->
+<section id="story3">
+<h2>Our Fight</h2>
+<video src="fight.mp4" controls></video>
+<p>We fought… but never gave up. ❤️</p>
+<button onclick="next(4)">Next</button>
+</section>
+
+<!-- STORY 4 -->
+<section id="story4">
+<h2>Our Patch Up</h2>
+<video src="patch.mp4" controls></video>
+<img src="patch.jpg">
+<p>We always come back stronger. 💞</p>
+<button onclick="next(5)">Next</button>
+</section>
+
+<!-- STORY 5 -->
+<section id="story5">
+<h2>Us Now</h2>
+<img src="present.jpg">
+<p>Today we are stronger than ever. ❤️</p>
+<button onclick="next(6)">Next</button>
+</section>
+
+<!-- VALENTINE -->
+<section id="story6">
+<h2>Will You Be My Valentine?</h2>
+<button id="yesBtn" onclick="showYes()">YES ❤️</button>
+<button id="noBtn" onmouseover="moveNo()">NO 😜</button>
+</section>
+
+<!-- YES SCREEN -->
+<div id="yesScreen">
+    <div class="yesImages">
+        <img src="yes1.jpg">
+        <img src="yes2.jpg">
+    </div>
+    <h1 style="margin-top:30px;">I Love You Forever ❤️</h1>
+</div>
+
+<script>
+
+let music = document.getElementById("bgMusic");
+
+function startStory(){
+    document.getElementById("intro").classList.remove("active");
+    document.getElementById("story1").classList.add("active");
+    music.play();
+}
+
+function next(num){
+    let sections = document.querySelectorAll("section");
+    sections.forEach(sec => sec.classList.remove("active"));
+    document.getElementById("story"+num).classList.add("active");
+}
+
+function moveNo(){
+    let btn = document.getElementById("noBtn");
+    btn.style.position = "absolute";
+    btn.style.top = Math.random()*80 + "%";
+    btn.style.left = Math.random()*80 + "%";
+}
+
+function showYes(){
+    let sections = document.querySelectorAll("section");
+    sections.forEach(sec => sec.style.display="none");
+    document.getElementById("yesScreen").style.display="block";
+}
+
+</script>
+
+</body>
+</html>
