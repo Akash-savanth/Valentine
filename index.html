@@ -14,25 +14,49 @@ body{
     text-align:center;
 }
 
+/* Sections */
 section{
     display:none;
     min-height:100vh;
-    padding:40px 20px;
+    padding:30px 15px;
 }
 
 .active{
     display:block;
 }
 
-h1,h2,p{
-    color:white;
+/* Headings */
+h1{
+    font-size:28px;
+}
+h2{
+    font-size:22px;
+}
+p{
+    font-size:16px;
+    margin-bottom:15px;
 }
 
+/* Medium size media */
+img{
+    width:260px;
+    height:auto;
+    border-radius:12px;
+    margin:10px;
+}
+
+video{
+    width:300px;
+    border-radius:12px;
+    margin:15px 0;
+}
+
+/* Buttons */
 button{
-    padding:12px 25px;
-    font-size:18px;
+    padding:10px 20px;
+    font-size:16px;
     border:none;
-    border-radius:25px;
+    border-radius:20px;
     cursor:pointer;
     margin:15px;
 }
@@ -57,24 +81,6 @@ button{
     color:white;
     position:relative;
 }
-
-img,video{
-    max-width:90%;
-    margin:15px 0;
-    border-radius:15px;
-}
-
-/* YES SCREEN */
-.yesImages{
-    display:flex;
-    justify-content:center;
-    gap:20px;
-    flex-wrap:wrap;
-}
-
-.yesImages img{
-    max-width:300px;
-}
 </style>
 </head>
 <body>
@@ -86,8 +92,8 @@ img,video{
 <!-- INTRO -->
 <section id="intro" class="active">
 <h1>Hi Ammu ❤️</h1>
-<p>From strangers… to forever 💕</p>
-<button class="enter-btn" onclick="startStory()">💖 Enter My Heart 💖</button>
+<p>From strangers to forever 💕</p>
+<button class="enter-btn" onclick="startStory()">Enter My Heart ❤️</button>
 </section>
 
 <!-- MEET -->
@@ -95,6 +101,7 @@ img,video{
 <h2>The First Time We Met</h2>
 <p>I didn’t know I was meeting my whole future ❤️</p>
 <img src="meet1.jpg">
+<br>
 <button class="next-btn" onclick="next(2)">Next</button>
 </section>
 
@@ -104,14 +111,16 @@ img,video{
 <p>From good morning texts to late night talks 💕</p>
 <img src="chat1.jpg">
 <img src="chat2.jpg">
+<br>
 <button class="next-btn" onclick="next(3)">Next</button>
 </section>
 
 <!-- FIGHT -->
 <section id="story3">
 <h2>Our Fight</h2>
-<p>We fought… but never gave up ❤️</p>
+<p>We fought but never gave up ❤️</p>
 <video src="fight.mp4" controls></video>
+<br>
 <button class="next-btn" onclick="next(4)">Next</button>
 </section>
 
@@ -120,7 +129,9 @@ img,video{
 <h2>Our Patch Up</h2>
 <p>We always come back stronger 💞</p>
 <img src="patch.jpg">
+<br>
 <video src="patch.mp4" controls></video>
+<br>
 <button class="next-btn" onclick="next(5)">Next</button>
 </section>
 
@@ -129,6 +140,7 @@ img,video{
 <h2>Us Now ❤️</h2>
 <p>Today we are stronger than ever 💕</p>
 <img src="present.jpg">
+<br>
 <button class="next-btn" onclick="next(6)">Next</button>
 </section>
 
@@ -142,10 +154,7 @@ img,video{
 <!-- YES SCREEN -->
 <section id="yesScreen">
 <h1>I LOVE YOU FOREVER ❤️</h1>
-<div class="yesImages">
-    <img src="yes1.jpg">
-    <img src="yes2.jpg">
-</div>
+<img src="yes.jpg">
 </section>
 
 <script>
@@ -166,8 +175,8 @@ function next(num){
 function moveNo(){
     let btn = document.getElementById("noBtn");
     btn.style.position = "absolute";
-    btn.style.top = Math.random()*80 + "%";
-    btn.style.left = Math.random()*80 + "%";
+    btn.style.top = Math.random()*70 + "%";
+    btn.style.left = Math.random()*70 + "%";
 }
 
 function showYes(){
