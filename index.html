@@ -8,11 +8,34 @@
 body{
     margin:0;
     padding:0;
-    background:black;
+    background:linear-gradient(135deg,#ff0033,#990000);
     color:white;
     font-family:Arial, sans-serif;
     text-align:center;
     overflow-x:hidden;
+    position:relative;
+}
+
+/* Floating Hearts (for whole site) */
+.heart{
+    position:fixed;
+    color:white;
+    font-size:20px;
+    animation:floatUp 8s linear infinite;
+    opacity:0.7;
+    z-index:0;
+}
+
+@keyframes floatUp{
+    0%{
+        transform:translateY(100vh);
+        opacity:0;
+    }
+    50%{opacity:1;}
+    100%{
+        transform:translateY(-10vh);
+        opacity:0;
+    }
 }
 
 /* Sections */
@@ -21,6 +44,8 @@ section{
     min-height:100vh;
     padding:40px 20px;
     animation:fadeIn 1.5s ease-in-out;
+    position:relative;
+    z-index:1;
 }
 
 .active{
@@ -59,13 +84,6 @@ video{
     flex-wrap:wrap;
 }
 
-/* YES Romantic Background */
-.romantic-bg{
-    background:linear-gradient(135deg,#ff0033,#990000);
-    position:relative;
-    overflow:hidden;
-}
-
 /* YES images */
 .yes-container{
     display:flex;
@@ -80,27 +98,6 @@ video{
     box-shadow:0 0 25px rgba(255,255,255,0.5);
 }
 
-/* Floating Hearts */
-.heart{
-    position:absolute;
-    color:white;
-    font-size:20px;
-    animation:floatUp 8s linear infinite;
-    opacity:0.8;
-}
-
-@keyframes floatUp{
-    0%{
-        transform:translateY(100vh);
-        opacity:0;
-    }
-    50%{opacity:1;}
-    100%{
-        transform:translateY(-10vh);
-        opacity:0;
-    }
-}
-
 /* Buttons */
 button{
     padding:12px 25px;
@@ -113,7 +110,7 @@ button{
 
 #yesBtn{background:green;color:white;}
 #noBtn{background:red;color:white;position:relative;}
-.enter-btn{background:red;color:white;}
+.enter-btn{background:white;color:#990000;}
 </style>
 </head>
 <body>
@@ -176,14 +173,12 @@ button{
 </section>
 
 <!-- YES SCREEN -->
-<section id="yesScreen" class="romantic-bg">
+<section id="yesScreen">
 <h1>I LOVE YOU FOREVER ❤️</h1>
-
 <div class="yes-container">
     <img src="yes1.jpg">
     <img src="yes2.jpg">
 </div>
-
 </section>
 
 <script>
@@ -192,13 +187,16 @@ let current = 1;
 let totalSlides = 6;
 let slideshowInterval;
 
+/* Start Story */
 function startStory(){
+    createHearts(); // start hearts immediately
     document.getElementById("intro").classList.remove("active");
     document.getElementById("story1").classList.add("active");
     music.play();
     startSlideshow();
 }
 
+/* Slideshow */
 function startSlideshow(){
     slideshowInterval = setInterval(()=>{
         document.getElementById("story"+current).classList.remove("active");
@@ -208,9 +206,10 @@ function startSlideshow(){
         } else {
             clearInterval(slideshowInterval);
         }
-    },5000); // change slide every 5 seconds
+    },5000);
 }
 
+/* Move NO button */
 function moveNo(){
     let btn = document.getElementById("noBtn");
     btn.style.position = "absolute";
@@ -218,20 +217,21 @@ function moveNo(){
     btn.style.left = Math.random()*70 + "%";
 }
 
+/* Show YES screen */
 function showYes(){
     document.getElementById("story6").classList.remove("active");
     document.getElementById("yesScreen").classList.add("active");
-    createHearts();
 }
 
+/* Create floating hearts */
 function createHearts(){
-    for(let i=0;i<30;i++){
+    for(let i=0;i<40;i++){
         let heart=document.createElement("div");
         heart.className="heart";
         heart.innerHTML="❤️";
         heart.style.left=Math.random()*100+"vw";
         heart.style.animationDuration=(5+Math.random()*5)+"s";
-        document.getElementById("yesScreen").appendChild(heart);
+        document.body.appendChild(heart);
     }
 }
 </script>
