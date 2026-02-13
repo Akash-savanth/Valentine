@@ -1,5 +1,10 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>For Ammu ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
-/* Existing styles... */
 body{
     margin:0;
     padding:0;
@@ -13,14 +18,11 @@ body{
 /* Glow Text */
 h1,h2{
     text-shadow:0 0 15px rgba(255,255,255,0.7);
-    margin: 15px 0;
 }
 
 p{
     font-size:17px;
     text-shadow:0 0 10px rgba(255,255,255,0.5);
-    margin: 10px 20px;
-    line-height: 1.5;
 }
 
 /* Floating Hearts */
@@ -33,6 +35,18 @@ p{
     z-index:0;
 }
 
+@keyframes floatUp{
+    0%{
+        transform:translateY(0) scale(1);
+        opacity:0;
+    }
+    20%{opacity:1;}
+    100%{
+        transform:translateY(-110vh) scale(1.6);
+        opacity:0;
+    }
+}
+
 /* Sparkle Overlay */
 body::after{
     content:"";
@@ -43,6 +57,11 @@ body::after{
     background-size:25px 25px;
     animation:sparkle 12s linear infinite;
     z-index:0;
+}
+
+@keyframes sparkle{
+    from{background-position:0 0;}
+    to{background-position:120px 120px;}
 }
 
 /* Sections */
@@ -59,12 +78,30 @@ section{
     animation:fadeIn 1.5s ease-in-out;
 }
 
-img, video{
-    max-width:90%;
-    height:auto;
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(20px);}
+    to{opacity:1; transform:translateY(0);}
 }
 
-/* Media Row */
+img{
+    width:260px;
+    border-radius:20px;
+    margin:10px;
+    box-shadow:0 0 20px rgba(255,255,255,0.5);
+    transition:0.3s;
+}
+
+img:hover{
+    transform:scale(1.05);
+}
+
+video{
+    width:300px;
+    border-radius:20px;
+    margin:15px 0;
+    box-shadow:0 0 20px rgba(255,255,255,0.5);
+}
+
 .media-row{
     display:flex;
     justify-content:center;
@@ -73,7 +110,14 @@ img, video{
     flex-wrap:wrap;
 }
 
-/* Buttons */
+.yes-container{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+    margin-top:20px;
+}
+
 button{
     padding:12px 25px;
     font-size:16px;
@@ -84,6 +128,7 @@ button{
     transition:0.3s;
 }
 
+/* Buttons */
 #yesBtn{
     background:linear-gradient(45deg,#ff0066,#ff4d6d);
     color:white;
@@ -110,19 +155,154 @@ button{
 .enter-btn:hover{
     transform:scale(1.1);
 }
-
-/* Responsive for Mobile */
-@media screen and (max-width: 600px) {
-    body {
-        font-size: 16px;
-        padding: 10px;
-    }
-    h1 { font-size: 24px; }
-    h2 { font-size: 20px; }
-    p { font-size: 16px; }
-    button { padding: 14px 28px; font-size: 18px; }
-    .media-row { flex-direction: column; gap: 15px; }
-    img, video { width: 95%; max-width: 300px; }
-    .yes-container { flex-direction: column; }
-}
 </style>
+</head>
+<body>
+
+<audio id="bgMusic" loop>
+  <source src="love-story.mp3" type="audio/mp3">
+</audio>
+
+<!-- INTRO -->
+<section id="intro" class="active">
+<h1>Hi Ammu ❤️</h1>
+<p>From strangers to forever 💕</p>
+<button class="enter-btn" onclick="startStory()">Enter My Heart ❤️</button>
+</section>
+
+<!-- MEET -->
+<section id="story1">
+<h2>The First Time We Met</h2>
+<p>I didn’t know I was meeting my whole future ❤️</p>
+<img src="meet1.jpg">
+</section>
+
+<!-- CHAT -->
+<section id="story2">
+<h2>Our Cute Chats</h2>
+<p>From good morning texts to late night talks 💕</p>
+<img src="chat1.jpg">
+<img src="chat2.jpg">
+</section>
+
+<!-- FIGHT -->
+<section id="story3">
+<h2>Our Fight</h2>
+<p>We fought but still stayed together ❤️</p>
+<video id="fightVideo" src="fight.mp4"></video>
+</section>
+
+<!-- PATCH -->
+<section id="story4">
+<h2>Our Patch Up</h2>
+<p>We always come back stronger 💞</p>
+<div class="media-row">
+    <video id="patchVideo" src="patch.mp4"></video>
+    <img src="patch.jpg">
+</div>
+</section>
+
+<!-- PRESENT -->
+<section id="story5">
+<h2>Us Now ❤️</h2>
+<p>Today we are stronger than ever 💕</p>
+<img src="present.jpg">
+</section>
+
+<!-- VALENTINE -->
+<section id="story6">
+<h2>Will You Be My Valentine?</h2>
+<button id="yesBtn" onclick="showYes()">YES ❤️</button>
+<button id="noBtn" onmouseover="moveNo()">NO 😜</button>
+</section>
+
+<!-- YES SCREEN -->
+<section id="yesScreen">
+<h1>I LOVE YOU FOREVER ❤️</h1>
+<div class="yes-container">
+    <img src="yes1.jpg">
+    <img src="yes2.jpg">
+</div>
+</section>
+
+<script>
+let music = document.getElementById("bgMusic");
+let slides = ["story1","story2","story3","story4","story5","story6"];
+let currentIndex = 0;
+
+/* Start Story */
+function startStory(){
+    createHearts();
+    document.getElementById("intro").classList.remove("active");
+    music.play();
+    showSlide();
+}
+
+/* Show Slide */
+function showSlide(){
+    let id = slides[currentIndex];
+    document.getElementById(id).classList.add("active");
+
+    let video = document.querySelector("#"+id+" video");
+
+    if(video){
+        video.play();
+        video.onended = function(){
+            nextSlide();
+        };
+    } else {
+        if(id !== "story6"){
+            setTimeout(nextSlide,4000);
+        }
+    }
+}
+
+/* Next Slide */
+function nextSlide(){
+    document.getElementById(slides[currentIndex]).classList.remove("active");
+    currentIndex++;
+
+    if(currentIndex < slides.length){
+        showSlide();
+    }
+}
+
+/* Move NO Button */
+function moveNo(){
+    let btn = document.getElementById("noBtn");
+    btn.style.position = "absolute";
+    btn.style.top = Math.random()*70 + "%";
+    btn.style.left = Math.random()*70 + "%";
+}
+
+/* YES Click */
+function showYes(){
+    document.getElementById("story6").classList.remove("active");
+    document.getElementById("yesScreen").classList.add("active");
+}
+
+/* Advanced Floating Hearts */
+function createHearts(){
+    setInterval(function(){
+        let heart = document.createElement("div");
+        heart.className = "heart";
+
+        let hearts = ["❤️","💖","💕","💗","💘"];
+        heart.innerHTML = hearts[Math.floor(Math.random()*hearts.length)];
+
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (15 + Math.random() * 30) + "px";
+        heart.style.animationDuration = (4 + Math.random() * 6) + "s";
+
+        document.body.appendChild(heart);
+
+        setTimeout(function(){
+            heart.remove();
+        },8000);
+
+    },250);
+}
+</script>
+
+</body>
+</html>
