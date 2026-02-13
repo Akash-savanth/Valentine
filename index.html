@@ -1,104 +1,236 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>For My Ammu ❤️</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(to right, #ff758c, #ff7eb3);
-            font-family: 'Segoe UI', sans-serif;
-            text-align: center;
-            color: white;
-            overflow-x: hidden;
-        }
+<title>For Ammu ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        h1 {
-            margin-top: 100px;
-            font-size: 50px;
-        }
+<style>
+body{
+    margin:0;
+    padding:0;
+    background:linear-gradient(to right,#ff9a9e,#fad0c4);
+    font-family:'Segoe UI',sans-serif;
+    text-align:center;
+    overflow:hidden;
+    color:white;
+}
 
-        p {
-            font-size: 22px;
-            width: 70%;
-            margin: auto;
-        }
+section{
+    display:none;
+    height:100vh;
+    width:100%;
+    position:absolute;
+    top:0;
+    left:0;
+    padding:20px;
+}
 
-        button {
-            margin-top: 40px;
-            padding: 15px 30px;
-            font-size: 18px;
-            background: white;
-            color: #ff4e73;
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
+.active{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
 
-        button:hover {
-            background: #ffe6ec;
-        }
+h1,h2,p{
+    max-width:700px;
+}
 
-        .hidden {
-            display: none;
-        }
+.heart-btn{
+    background:red;
+    color:white;
+    border:none;
+    font-size:22px;
+    padding:15px 30px;
+    border-radius:50px;
+    cursor:pointer;
+    margin-top:20px;
+}
 
-        .heart {
-            position: fixed;
-            color: red;
-            font-size: 20px;
-            animation: float 5s linear infinite;
-        }
+img,video{
+    max-width:90%;
+    max-height:50vh;
+    border-radius:15px;
+    margin:10px;
+}
 
-        @keyframes float {
-            0% {
-                transform: translateY(100vh);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-10vh);
-                opacity: 0;
-            }
-        }
-    </style>
+button{
+    padding:10px 20px;
+    font-size:18px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+#yesBtn{
+    background:green;
+    color:white;
+}
+
+#noBtn{
+    background:red;
+    color:white;
+    position:absolute;
+}
+
+/* Cinematic YES Screen */
+
+#yesScreen{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:black;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    opacity:0;
+    visibility:hidden;
+    transition:opacity 2s ease;
+}
+
+.yesImages{
+    display:flex;
+    gap:30px;
+}
+
+.yesImages img{
+    max-width:300px;
+    border-radius:20px;
+    opacity:0;
+    transform:scale(0.8);
+    transition:all 3s ease;
+}
+
+#yesScreen h1{
+    opacity:0;
+    transition:opacity 3s ease;
+    margin-top:30px;
+}
+
+#yesScreen.show{
+    opacity:1;
+    visibility:visible;
+}
+
+#yesScreen.show img{
+    opacity:1;
+    transform:scale(1);
+}
+
+#yesScreen.show h1{
+    opacity:1;
+}
+
+</style>
 </head>
-
 <body>
 
-    <h1>For My Ammu ❤️</h1>
+<audio id="bgMusic" loop>
+  <source src="love-story.mp3" type="audio/mp3">
+</audio>
 
-    <p>
-        From the day you entered my life, everything feels magical.  
-        No matter how many fights, mood swings, or misunderstandings,  
-        I will always choose you. Every single time. 💕
-    </p>
+<!-- INTRO -->
+<section id="intro" class="active">
+<h1>Hi Ammu ❤️</h1>
+<p>
+From strangers… to friends…  
+From fights… to forever…  
+You are my peace, my happiness, my everything. 💕
+</p>
+<button class="heart-btn" onclick="startStory()">❤️ Enter My Heart ❤️</button>
+</section>
 
-    <button onclick="showMessage()">Click If You Love Me 😘</button>
+<!-- STORY 1 -->
+<section id="story1">
+<h2>🌸 The First Time We Met</h2>
+<img src="meet1.jpg">
+<img src="meet2.jpg">
+<p>I didn't know I was meeting my whole future. ❤️</p>
+<button onclick="next(2)">Next ➡</button>
+</section>
 
-    <h2 id="surprise" class="hidden">
-        Will You Be My Forever Valentine? 💍❤️
-    </h2>
+<!-- STORY 2 -->
+<section id="story2">
+<h2>💬 Our Cute Chats</h2>
+<img src="chat1.jpg">
+<img src="chat2.jpg">
+<p>From good morning texts to late night talks… we became everything. 💕</p>
+<button onclick="next(3)">Next ➡</button>
+</section>
 
-    <script>
-        function showMessage() {
-            document.getElementById("surprise").classList.remove("hidden");
-        }
+<!-- STORY 3 -->
+<section id="story3">
+<h2>💔 Our Fight</h2>
+<video src="fight.mp4" controls></video>
+<p>We fought… but we never gave up. ❤️</p>
+<button onclick="next(4)">Next ➡</button>
+</section>
 
-        // Floating hearts
-        setInterval(function() {
-            var heart = document.createElement("div");
-            heart.classList.add("heart");
-            heart.innerHTML = "❤️";
-            heart.style.left = Math.random() * 100 + "vw";
-            heart.style.fontSize = (Math.random() * 20 + 15) + "px";
-            document.body.appendChild(heart);
+<!-- STORY 4 -->
+<section id="story4">
+<h2>🤍 Our Patch Up</h2>
+<video src="patch.mp4" controls></video>
+<img src="patch.jpg">
+<p>No matter what happens… we always come back stronger. 💞</p>
+<button onclick="next(5)">Next ➡</button>
+</section>
 
-            setTimeout(function() {
-                heart.remove();
-            }, 5000);
-        }, 300);
-    </script>
+<!-- STORY 5 -->
+<section id="story5">
+<h2>🌈 Us Now</h2>
+<img src="present.jpg">
+<p>Today we are stronger and more in love than ever. ❤️</p>
+<button onclick="next(6)">Next ➡</button>
+</section>
+
+<!-- VALENTINE -->
+<section id="story6">
+<h2>💍 Will You Be My Valentine?</h2>
+<button id="yesBtn" onclick="showYes()">YES ❤️</button>
+<button id="noBtn" onmouseover="moveNo()">NO 😜</button>
+</section>
+
+<!-- CINEMATIC YES SCREEN -->
+<div id="yesScreen">
+    <div class="yesImages">
+        <img src="yes1.jpg">
+        <img src="yes2.jpg">
+    </div>
+    <h1>I Love You Forever Ammu ❤️</h1>
+</div>
+
+<script>
+
+let music = document.getElementById("bgMusic");
+
+function startStory(){
+    document.getElementById("intro").classList.remove("active");
+    document.getElementById("story1").classList.add("active");
+    music.play();
+}
+
+function next(num){
+    let current = document.querySelector(".active");
+    current.classList.remove("active");
+    document.getElementById("story"+num).classList.add("active");
+}
+
+function moveNo(){
+    let btn = document.getElementById("noBtn");
+    btn.style.top = Math.random()*80 + "%";
+    btn.style.left = Math.random()*80 + "%";
+}
+
+function showYes(){
+    let current = document.querySelector(".active");
+    current.classList.remove("active");
+    document.getElementById("yesScreen").classList.add("show");
+}
+
+</script>
 
 </body>
 </html>
