@@ -12,75 +12,108 @@ body{
     color:white;
     font-family:Arial, sans-serif;
     text-align:center;
+    overflow-x:hidden;
 }
 
 /* Sections */
 section{
     display:none;
     min-height:100vh;
-    padding:30px 15px;
+    padding:40px 20px;
+    animation:fadeIn 1.5s ease-in-out;
 }
 
 .active{
     display:block;
 }
 
-/* Headings */
-h1{
-    font-size:28px;
-}
-h2{
-    font-size:22px;
-}
-p{
-    font-size:16px;
-    margin-bottom:15px;
+@keyframes fadeIn{
+    from{opacity:0;}
+    to{opacity:1;}
 }
 
-/* Medium size media */
+/* Text */
+h1{font-size:28px;}
+h2{font-size:22px;}
+p{font-size:16px;}
+
+/* Media */
 img{
     width:260px;
-    height:auto;
-    border-radius:12px;
+    border-radius:15px;
     margin:10px;
 }
 
 video{
     width:300px;
-    border-radius:12px;
+    border-radius:15px;
     margin:15px 0;
+}
+
+/* Patch side by side */
+.media-row{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+/* YES Romantic Background */
+.romantic-bg{
+    background:linear-gradient(135deg,#ff0033,#990000);
+    position:relative;
+    overflow:hidden;
+}
+
+/* YES images */
+.yes-container{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+    margin-top:20px;
+}
+
+.yes-container img{
+    width:260px;
+    box-shadow:0 0 25px rgba(255,255,255,0.5);
+}
+
+/* Floating Hearts */
+.heart{
+    position:absolute;
+    color:white;
+    font-size:20px;
+    animation:floatUp 8s linear infinite;
+    opacity:0.8;
+}
+
+@keyframes floatUp{
+    0%{
+        transform:translateY(100vh);
+        opacity:0;
+    }
+    50%{opacity:1;}
+    100%{
+        transform:translateY(-10vh);
+        opacity:0;
+    }
 }
 
 /* Buttons */
 button{
-    padding:10px 20px;
+    padding:12px 25px;
     font-size:16px;
     border:none;
     border-radius:20px;
     cursor:pointer;
-    margin:15px;
+    margin-top:20px;
 }
 
-.enter-btn{
-    background:red;
-    color:white;
-}
-
-.next-btn{
-    background:white;
-    color:black;
-}
-
-#yesBtn{
-    background:green;
-    color:white;
-}
-
-#noBtn{
-    background:red;
-    color:white;
-    position:relative;
-}
+#yesBtn{background:green;color:white;}
+#noBtn{background:red;color:white;position:relative;}
+.enter-btn{background:red;color:white;}
 </style>
 </head>
 <body>
@@ -101,8 +134,6 @@ button{
 <h2>The First Time We Met</h2>
 <p>I didn’t know I was meeting my whole future ❤️</p>
 <img src="meet1.jpg">
-<br>
-<button class="next-btn" onclick="next(2)">Next</button>
 </section>
 
 <!-- CHAT -->
@@ -111,31 +142,23 @@ button{
 <p>From good morning texts to late night talks 💕</p>
 <img src="chat1.jpg">
 <img src="chat2.jpg">
-<br>
-<button class="next-btn" onclick="next(3)">Next</button>
 </section>
 
 <!-- FIGHT -->
 <section id="story3">
 <h2>Our Fight</h2>
-<p>We fought but..... ❤️</p>
+<p>We fought but still stayed together ❤️</p>
 <video src="fight.mp4" controls></video>
-<br>
-<button class="next-btn" onclick="next(4)">Next</button>
 </section>
 
 <!-- PATCH -->
 <section id="story4">
 <h2>Our Patch Up</h2>
 <p>We always come back stronger 💞</p>
-
 <div class="media-row">
     <video src="patch.mp4" controls></video>
     <img src="patch.jpg">
 </div>
-
-<br>
-<button class="next-btn" onclick="next(5)">Next</button>
 </section>
 
 <!-- PRESENT -->
@@ -143,8 +166,6 @@ button{
 <h2>Us Now ❤️</h2>
 <p>Today we are stronger than ever 💕</p>
 <img src="present.jpg">
-<br>
-<button class="next-btn" onclick="next(6)">Next</button>
 </section>
 
 <!-- VALENTINE -->
@@ -155,7 +176,7 @@ button{
 </section>
 
 <!-- YES SCREEN -->
-<section id="yesScreen">
+<section id="yesScreen" class="romantic-bg">
 <h1>I LOVE YOU FOREVER ❤️</h1>
 
 <div class="yes-container">
@@ -167,17 +188,27 @@ button{
 
 <script>
 let music = document.getElementById("bgMusic");
+let current = 1;
+let totalSlides = 6;
+let slideshowInterval;
 
 function startStory(){
     document.getElementById("intro").classList.remove("active");
     document.getElementById("story1").classList.add("active");
     music.play();
+    startSlideshow();
 }
 
-function next(num){
-    let sections = document.querySelectorAll("section");
-    sections.forEach(sec => sec.classList.remove("active"));
-    document.getElementById("story"+num).classList.add("active");
+function startSlideshow(){
+    slideshowInterval = setInterval(()=>{
+        document.getElementById("story"+current).classList.remove("active");
+        current++;
+        if(current<=totalSlides){
+            document.getElementById("story"+current).classList.add("active");
+        } else {
+            clearInterval(slideshowInterval);
+        }
+    },5000); // change slide every 5 seconds
 }
 
 function moveNo(){
@@ -188,9 +219,20 @@ function moveNo(){
 }
 
 function showYes(){
-    let sections = document.querySelectorAll("section");
-    sections.forEach(sec => sec.classList.remove("active"));
+    document.getElementById("story6").classList.remove("active");
     document.getElementById("yesScreen").classList.add("active");
+    createHearts();
+}
+
+function createHearts(){
+    for(let i=0;i<30;i++){
+        let heart=document.createElement("div");
+        heart.className="heart";
+        heart.innerHTML="❤️";
+        heart.style.left=Math.random()*100+"vw";
+        heart.style.animationDuration=(5+Math.random()*5)+"s";
+        document.getElementById("yesScreen").appendChild(heart);
+    }
 }
 </script>
 
