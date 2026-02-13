@@ -12,35 +12,35 @@ body{
     color:white;
     font-family:'Segoe UI', cursive;
     text-align:center;
-    overflow-x:hidden;
+    overflow:hidden;
 }
 
-/* Center Everything */
+/* Hide all slides */
 section{
     display:none;
     min-height:100vh;
     padding:30px 20px;
-    position:relative;
-    z-index:1;
+    position:absolute;
+    width:100%;
+    top:0;
+    left:0;
 
-    display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
 }
 
-/* Active Section */
+/* Show only active slide */
 .active{
     display:flex;
     animation:fadeIn 1.5s ease-in-out;
 }
 
 @keyframes fadeIn{
-    from{opacity:0; transform:translateY(30px);}
-    to{opacity:1; transform:translateY(0);}
+    from{opacity:0;}
+    to{opacity:1;}
 }
 
-/* Glow Text */
 h1,h2{
     text-shadow:0 0 20px rgba(255,255,255,0.8);
 }
@@ -52,7 +52,6 @@ p{
     text-shadow:0 0 12px rgba(255,255,255,0.6);
 }
 
-/* Images */
 img{
     width:260px;
     border-radius:20px;
@@ -65,24 +64,20 @@ img:hover{
     transform:scale(1.08);
 }
 
-/* Romantic Video Filter */
 video{
     width:300px;
     border-radius:20px;
     margin:15px 0;
     box-shadow:0 0 25px rgba(255,255,255,0.6);
-    filter:brightness(1.1) contrast(1.1) saturate(1.2);
 }
 
 .media-row{
     display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:25px;
+    gap:20px;
     flex-wrap:wrap;
+    justify-content:center;
 }
 
-/* Buttons */
 button{
     padding:14px 30px;
     font-size:17px;
@@ -97,7 +92,6 @@ button{
     background:white;
     color:#ff4d6d;
     font-weight:bold;
-    box-shadow:0 0 20px white;
 }
 
 .enter-btn:hover{
@@ -107,7 +101,6 @@ button{
 #yesBtn{
     background:linear-gradient(45deg,#ff0066,#ff4d6d);
     color:white;
-    box-shadow:0 0 20px #ff4d6d;
 }
 
 #yesBtn:hover{
@@ -126,30 +119,12 @@ button{
     bottom:-10px;
     animation:floatUp linear infinite;
     opacity:0.8;
-    z-index:0;
 }
 
 @keyframes floatUp{
-    0%{transform:translateY(0) scale(1);opacity:0;}
+    0%{transform:translateY(0);opacity:0;}
     20%{opacity:1;}
-    100%{transform:translateY(-110vh) scale(1.6);opacity:0;}
-}
-
-/* Sparkle Overlay */
-body::after{
-    content:"";
-    position:fixed;
-    width:100%;
-    height:100%;
-    background:radial-gradient(circle, rgba(255,255,255,0.12) 1px, transparent 1px);
-    background-size:25px 25px;
-    animation:sparkle 12s linear infinite;
-    z-index:0;
-}
-
-@keyframes sparkle{
-    from{background-position:0 0;}
-    to{background-position:120px 120px;}
+    100%{transform:translateY(-110vh);opacity:0;}
 }
 </style>
 </head>
@@ -163,98 +138,60 @@ body::after{
 <section id="intro" class="active">
 <h1>Hi Ammu ❤️</h1>
 <p>
-From two strangers who didn’t even know each other’s names…  
-to two hearts that can’t sleep without saying “goodnight” 💕  
-You are not just my girlfriend Ammu,  
-you are my peace, my comfort, my forever.
+From two strangers to two souls that can’t sleep without saying goodnight 💕  
+You are my peace, my comfort, my forever.
 </p>
 <button class="enter-btn" onclick="startStory()">Enter My Heart 💖</button>
 </section>
 
-<!-- MEET -->
 <section id="story1">
 <h2>The First Time We Met</h2>
-<p>
-That day looked normal… but destiny was secretly smiling.  
-I didn’t know I was meeting the girl  
-who would become my home, my happiness,  
-and my whole future ❤️
-</p>
+<p>That normal day became my favorite memory ❤️</p>
 <img src="meet1.jpg">
 </section>
 
-<!-- CHAT -->
 <section id="story2">
 <h2>Our Cute Chats</h2>
-<p>
-From simple “good morning” texts  
-to late night deep talks about dreams and life…  
-Every message from you became my favorite notification 💕
-</p>
+<p>Every notification from you became my happiness 💕</p>
 <img src="chat1.jpg">
 <img src="chat2.jpg">
 </section>
 
-<!-- FIGHT -->
 <section id="story3">
 <h2>Our Fight</h2>
-<p>
-Yes, we fought… we cried…  
-but even in anger, we never left each other’s hands.  
-Because love is not about never fighting…  
-it’s about choosing each other every time ❤️
-</p>
+<p>Even in anger, we chose each other ❤️</p>
 <video id="fightVideo" src="fight.mp4"></video>
 </section>
 
-<!-- PATCH -->
 <section id="story4">
 <h2>Our Patch Up</h2>
-<p>
-Every misunderstanding made us stronger.  
-Every tear made us closer.  
-And every patch up reminded me  
-why I can never lose you 💞
-</p>
+<p>Every tear made us stronger 💞</p>
 <div class="media-row">
-    <video id="patchVideo" src="patch.mp4"></video>
+    <video src="patch.mp4"></video>
     <img src="patch.jpg">
 </div>
 </section>
 
-<!-- PRESENT -->
 <section id="story5">
 <h2>Us Now ❤️</h2>
-<p>
-Today we are stronger, deeper, and more connected than ever.  
-You are not just part of my life…  
-you are the most beautiful part of my existence 💕
-</p>
+<p>You are the most beautiful part of my existence 💕</p>
 <img src="present.jpg">
 </section>
 
-<!-- VALENTINE -->
+<!-- THIS SLIDE SHOULD STOP -->
 <section id="story6">
 <h2>Will You Be My Valentine?</h2>
-<p>
-No matter how many years pass,  
-I will always choose you… again and again ❤️
-</p>
+<p>I will always choose you ❤️</p>
 <button id="yesBtn" onclick="showYes()">YES ❤️</button>
 <button id="noBtn" onmouseover="moveNo()">NO 😜</button>
 </section>
 
-<!-- YES SCREEN -->
+<!-- FINAL SLIDE -->
 <section id="yesScreen">
 <h1>I LOVE YOU FOREVER ❤️</h1>
-<p>
-You are my today, my tomorrow, and my always.  
-Forever with you Ammu 💖
-</p>
-<div class="media-row">
-    <img src="yes1.jpg">
-    <img src="yes2.jpg">
-</div>
+<p>You are my today, tomorrow, and always 💖</p>
+<img src="yes1.jpg">
+<img src="yes2.jpg">
 </section>
 
 <script>
@@ -277,18 +214,25 @@ function showSlide(){
 
     if(video){
         video.play();
-        video.onended = function(){ nextSlide(); };
-    } else {
-        if(id !== "story6"){
-            setTimeout(nextSlide,5000);
-        }
+        video.onended = nextSlide;
+    } 
+    else if(id !== "story6"){  
+        setTimeout(nextSlide, 5000);
     }
+    // IMPORTANT: story6 does NOT auto move
 }
 
 function nextSlide(){
     document.getElementById(slides[currentIndex]).classList.remove("active");
     currentIndex++;
-    if(currentIndex < slides.length){ showSlide(); }
+    if(currentIndex < slides.length){
+        showSlide();
+    }
+}
+
+function showYes(){
+    document.getElementById("story6").classList.remove("active");
+    document.getElementById("yesScreen").classList.add("active");
 }
 
 function moveNo(){
@@ -296,11 +240,6 @@ function moveNo(){
     btn.style.position = "absolute";
     btn.style.top = Math.random()*70 + "%";
     btn.style.left = Math.random()*70 + "%";
-}
-
-function showYes(){
-    document.getElementById("story6").classList.remove("active");
-    document.getElementById("yesScreen").classList.add("active");
 }
 
 function createHearts(){
@@ -314,7 +253,7 @@ function createHearts(){
         heart.style.animationDuration = (4 + Math.random()*6) + "s";
         document.body.appendChild(heart);
         setTimeout(function(){ heart.remove(); },8000);
-    },250);
+    },300);
 }
 </script>
 
